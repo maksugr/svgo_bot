@@ -1,5 +1,5 @@
 # Svgo_bot
-![png](https://github.com/maksugr/svgo_bot/blob/master/svgo_bot-pic.png)
+![png](https://github.com/maksugr/svgo_bot/blob/master/svgo_bot.png)
 
 ## Overview
 
