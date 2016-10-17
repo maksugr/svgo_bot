@@ -182,13 +182,41 @@ const createFileMinifined = (params, callback) => {
  */
 const sendMinifinedSvg = params => {
 	const chatId = params.chatId;
+	const fileOriginalPath = params.fileOriginalPath;
 	const fileMinifinedPath = params.fileMinifinedPath;
 
 	const fileMinifined = fs.createReadStream(fileMinifinedPath);
-	svgo_bot.sendDocument(chatId, fileMinifined);
-
-	console.log(`Minifined svg file sended: ${chatId}, ${fileMinifinedPath}`);
+	svgo_bot.sendDocument(chatId, fileMinifined)
+		.then(() => {
+			const filesForRemove = [fileOriginalPath, fileMinifinedPath];
+			removeFiles(filesForRemove);
+			console.log(`Minifined svg file sended: ${chatId}, ${fileMinifinedPath}`);
+		})
+		.catch(error => {
+			sendMessage(chatId, `Error: \`${error}\``);
+		});
 };
+
+/**
+ * Remove files after 1 hour
+ *
+ * @param {String[]} files Files that will be removed
+ */
+const removeFiles = files => {
+	const TIMEOUT = 3600000;
+
+	_.forEach(files, file => {
+		setTimeout(() => {
+			fs.unlink(file, error => {
+				if (error) {
+					console.log(`Remove file ${file} error: ${error}`);
+				}
+
+				console.log(`Successful remove file ${file}`);
+			});
+		}, TIMEOUT);
+	});
+}
 
 /**
  * Wraper under bot sendMessage
