@@ -7,7 +7,8 @@ const _ = require('lodash');
 const SVGO = require('svgo');
 const svgo = new SVGO();
 
-const isSvg = require('is-svg-exstension');
+const isSvgExstension = require('is-svg-exstension');
+const isSvg = require('is-svg');
 
 const TelegramBot = require('node-telegram-bot-api');
 const config = require('./config');
@@ -44,6 +45,11 @@ svgo_bot.on('message', msg => {
 const minifyMarkupSvg = (params, svg) => {
 	const chatId = params.chatId;
 
+	if (!isSvg(svg)) {
+		sendMessage(chatId, `This is not the svg. Please, send svg.`);
+		return;
+	}
+
 	svgo.optimize(svg, result => {
 		if (result.error) {
 			sendMessage(chatId, `Error: \`${result.error}\``);
@@ -68,7 +74,7 @@ const getFile = params => {
 	const fileId = params.fileId;
 	const fileName = params.fileName;
 
-	if (!isSvg(fileName)) {
+	if (!isSvgExstension(fileName)) {
 		sendMessage(chatId, `File \`${fileName}\` isn't svg`);
 		return;
 	}

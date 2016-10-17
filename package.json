@@ -1,6 +1,6 @@
 {
   "name": "svgo_bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Telegram bot for SVGO",
   "main": "index",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/maksugr/svgo_bot#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "is-svg": "^2.0.1",
     "is-svg-exstension": "^0.1.1",
     "lodash": "^4.16.4",
     "node-telegram-bot-api": "^0.23.3",
