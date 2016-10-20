@@ -3,7 +3,7 @@
 
 ## Overview
 
-Telegram bot for SVGO (https://github.com/svg/svgo). Send to it svg in file or markup.
+Telegram bot for SVGO (https://github.com/svg/svgo) - svg minification. Send to it svg in file or markup.
 
 ## Requirements
 
